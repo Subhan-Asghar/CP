@@ -18,12 +18,12 @@ class Solution:
                 for j in range(c):
                     if grid[i][j]==1:
                         return [i,j]
-        
+
         i,j=get_index()
         dfs(i,j)
         q=deque(list(visited))
         level=0
-        print(q)
+
         while q:
             n=len(q)
             for _ in range(n):
@@ -37,5 +37,4 @@ class Solution:
                         q.append((nr,nc))
                         visited.add((nr,nc))
             level+=1
-        print("end")
         return level
