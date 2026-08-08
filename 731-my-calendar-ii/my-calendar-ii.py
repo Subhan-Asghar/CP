@@ -6,21 +6,20 @@ class MyCalendarTwo:
 
     def book(self, startTime: int, endTime: int) -> bool:
         if not self.events:
-            hq.heappush(self.events,(startTime,1))
-            hq.heappush(self.events,(endTime,-1))
+            self.events.append((startTime,1))
+            self.events.append((endTime,-1))
             return True
         temp_heap=self.events[:]
         count=0
-        hq.heappush(temp_heap,(startTime,1))
-        hq.heappush(temp_heap,(endTime,-1))
-        while temp_heap:
-            book,changes=hq.heappop(temp_heap)
+        temp_heap.append((startTime,1))
+        temp_heap.append((endTime,-1))
+        temp_heap.sort()
+        for _ , changes in temp_heap:
             count+=changes
             if count>=3:
                 return False
-                
-        hq.heappush(self.events,(startTime,1))
-        hq.heappush(self.events,(endTime,-1))
+
+        self.events=temp_heap[:]
         return True
 
 
