@@ -1,17 +1,21 @@
 class Solution:
     def change(self, amount: int, coins: List[int]) -> int:
-        def knapsack(W,n):
-            if W==0:
-                return 1
-            if n==0:
-                return 0
-            if (W,n) in memo:
-                return memo[(W,n)]
-            if coins[n-1]>W:
-                ans=knapsack(W,n-1)
-            else:
-                ans=knapsack(W-coins[n-1],n)+knapsack(W,n-1)
-            memo[(W,n)]=ans
-            return ans
+        n=len(coins)
         memo={}
-        return knapsack(amount,len(coins))
+        def knapsack(amount,index):
+            if amount==0:
+                return 1
+            if index==n:
+                return 0
+            if (amount,index) in memo:
+                return memo[(amount,index)]
+            if coins[index]>amount:
+                ans=knapsack(amount,index+1)
+            else:
+                take=knapsack(amount-coins[index],index)
+                not_take=knapsack(amount,index+1)
+                ans=take+not_take
+            memo[(amount,index)]=ans
+            return ans
+            
+        return knapsack(amount,0)
