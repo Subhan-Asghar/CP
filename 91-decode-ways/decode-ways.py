@@ -2,20 +2,18 @@ class Solution:
     def numDecodings(self, s: str) -> int:
         n=len(s)
         memo={}
-        def func(i):
-            if i>n:
+        def solve(index):
+            if index>n:
                 return 0
-            if i==n:
+            if index==n:
                 return 1
-            if i in memo:
-                return memo[i]
-
-            if s[i]=='0':
+            if s[index]=="0":
                 return 0
-            ans=func(i+1)
-            if i+1<n and 10<=int(s[i:i+2]) <=26:
-                ans+=func(i+2)
-            memo[i]=ans
+            if index in memo:
+                return memo[index]
+            ans=solve(index+1)
+            if index+1<n and 10<=int(s[index:index+2])<=26:
+                ans+=solve(index+2)
+            memo[index]=ans
             return ans
-        return func(0)
-
+        return solve(0)
