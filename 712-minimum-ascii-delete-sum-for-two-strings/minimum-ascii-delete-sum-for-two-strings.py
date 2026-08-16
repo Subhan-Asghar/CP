@@ -1,11 +1,7 @@
 class Solution:
     def minimumDeleteSum(self, s1: str, s2: str) -> int:
-        val1=0
-        val2=0
-        for s in s1:
-            val1+=ord(s)
-        for s in s2:
-            val2+=ord(s)
+        val1=sum(map(ord,s1))
+        val2=sum(map(ord,s2))
         memo={}
         def solve(m,n):
             if m==0 or n==0:
