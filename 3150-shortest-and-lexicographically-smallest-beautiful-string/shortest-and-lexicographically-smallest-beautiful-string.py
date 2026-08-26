@@ -16,8 +16,8 @@ class Solution:
                 curr=s[low:high+1]
                 if ans=="" or len(curr)<len(ans) or (len(curr)==len(ans) and curr<ans):
                     ans=curr
-                if s[low]=="1":
-                    count-=1
+                
+                count-=1
                 low+=1
         return ans
                 
